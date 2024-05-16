@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: app
+    restart: unless-stopped
+    container_name: symfony-app # A custom name to be used in build scripts
+    depends_on:
+      - db # requires the database service to be available
+    ports:
+      - "9980:80" # the service will be available in my browser at http://localhost:9980
+    volumes:
+      - .:/var/www/project # all files in current directory will also be available in the container, allowing you to update the source code with your IDE
+      - ./000-default.conf:/etc/apache2/sites-available/000-default.conf:ro # Override the default apache vhost file to ensure that the symfony application is served by default
+      # the contents of 000-default.conf is obtained from https://symfony.com/doc/current/setup/web_server_configuration.html, with modifications applied to match folder locations
+
+  db: # The service name or host to the database
+    image: mysql
+    restart: unless-stopped # ensures that the service automatically runs as soon as Docker starts up
+    volumes:
+      - mysql_data:/var/lib/mysql # persistent volume to ensure that database changes are retained during container restarts
+    environment:
+      # I do not normally use root to log in to MySQL
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      DB_USER: app_development
+      DB_PASSWORD: password
+      DB_NAME: app_db
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "9981:80" # the service will be available in my browser at http://localhost:9981
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db # must match the service name used for the MySQL database above
+      PMA_USER: app_development # must match the value of DB_USER above
+      PMA_PASSWORD: password # must match the value of DB_NAME above
+
+volumes:
+  mysql_data: # the volume name used in db:volumes above
