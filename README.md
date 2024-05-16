@@ -1,0 +1,1 @@
+# symfony-lamp-stack-with-docker
