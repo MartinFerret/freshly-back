@@ -1,9 +1,16 @@
 # Symfony7 Docker Template
 
-This project is a starter project for building a Symfony application using Docker.
+🚀 **Quickly set up your Symfony 7 application with Docker!**
 
-You can follow the tutorial for it
-here [https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-with-docker-without-having-php-locally-installed-on-your-machine](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-with-docker-without-having-php-locally-installed-on-your-machine).
+This starter template simplifies the process of building a Symfony application using Docker, allowing you to get up and
+running without needing to install PHP locally. Follow the step-by-step
+tutorial [here](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-with-docker-without-having-php-locally-installed-on-your-machine).
+
+## Features
+
+- Easy configuration through a customizable `docker.env` file.
+- Pre-defined scripts for building and connecting to your Docker containers.
+- Seamless integration with phpMyAdmin for database management.
 
 ## Getting Started
 
@@ -48,5 +55,5 @@ Inside the container, you may run any `symfony console` or `php bin/console` com
 changes you make in this container are
 immediately visible in your IDE and vice versa.
 
-Happy coding!!
+Happy coding! 🎉
 
