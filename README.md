@@ -39,4 +39,14 @@ here [https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-with-docke
 
 ## Where to Next?
 
-Congratulations for getting to this point.
+Congratulations on getting to this point. When you run `./dcconnect.sh` you will be shown the two URLs that you may use
+to access the application and the database (via phpMyAdmin).
+
+![Connecting to Symfony7 container](./dkconnect-img.png)
+
+Inside the container, you may run any `symfony console` or `php bin/console` command as you build your application. Any
+changes you make in this container are
+immediately visible in your IDE and vice versa.
+
+Happy coding!!
+
