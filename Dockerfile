@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-WORKDIR /var/www/project
+WORKDIR /var/www/html
 
 # install dependencies
 RUN apt-get update \

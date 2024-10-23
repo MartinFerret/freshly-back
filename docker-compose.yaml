@@ -13,6 +13,7 @@ services:
     volumes:
       - .:/var/www/project # all files in current directory will also be available in the container, allowing you to update the source code with your IDE
       - ./000-default.conf:/etc/apache2/sites-available/000-default.conf:ro # Override the default apache vhost file to ensure that the symfony application is served by default
+      - ./.bashrc:/root/.bashrc:ro # Override the default apache vhost file to ensure that the symfony application is served by default
       # the contents of 000-default.conf is obtained from https://symfony.com/doc/current/setup/web_server_configuration.html, with modifications applied to match folder locations
     environment:
       DATABASE_URL: "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=8.0.32&charset=utf8mb4"
