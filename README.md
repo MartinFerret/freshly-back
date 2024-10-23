@@ -1,4 +1,4 @@
-# symfony-lamp-stack-with-docker
+# Symfony7 with Docker (Template)
 
 This project is a starter project for building a Symfony application using Docker. 
 
