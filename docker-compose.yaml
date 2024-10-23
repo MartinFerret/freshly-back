@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     hostname: Symfony7
     restart: unless-stopped
-    container_name: Symfony7 # A custom name to be used in build scripts
+    container_name: "${APP_NAME}" # A custom name to be used in build scripts
     depends_on:
       - db # requires the database service to be available
     ports:
