@@ -9,7 +9,7 @@ services:
     depends_on:
       - db # requires the database service to be available
     ports:
-      - "${DC_APP_PORT}:80" # the service will be available in my browser at http://localhost:9980
+      - "${DC_APP_PORT}:80" # the service will be available in my browser at http://localhost:<DC_APP_PORT>
     volumes:
       - .:/var/www/html # all files in current directory will also be available in the container, allowing you to update the source code with your IDE
       - ./000-default.conf:/etc/apache2/sites-available/000-default.conf:ro # Override the default apache vhost file to ensure that the symfony application is served by default
@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
     container_name: "${DC_APP_NAME}-pma"
     ports:
-      - "${DC_PMA_PORT}:80" # the service will be available in my browser at http://localhost:9981
+      - "${DC_PMA_PORT}:80" # the service will be available in my browser at http://localhost:<DC_PMA_PORT>
     depends_on:
       - db
     environment:
