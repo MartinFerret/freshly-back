@@ -1,4 +1,4 @@
-# Symfony7 with Docker (Template)
+# Symfony7 Docker Template
 
 This project is a starter project for building a Symfony application using Docker. 
 
