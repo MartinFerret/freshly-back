@@ -15,6 +15,9 @@ tutorial [here](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-
 ## Getting Started
 
 1. Start by creating a new repository based on the *Symfony7 Docker Template* on *[GitHub](https://github.com)*.
+
+   ![New Repository](new-repository.png)
+
 2. Clone the new repository on your computer and open it in your favourite editor or IDE to get started.
 3. Open the file `docker.env` and customize any of the environment variables to your needs. You may change the `DC_*`
    values in order to avoid container conflicts with already running containers.
@@ -38,18 +41,18 @@ tutorial [here](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-
    container images and run the application.
 5. Next, run `./dkconnect.sh` to connect to the `app` service container where the *Symfony7* application is running.
 
-   ![Connecting to Symfony7 container](./dkconnect-img.png)
+   ![Connecting to Symfony7 container](dkconnect-img.png)
 
 6. Run `symfony composer install` to install the application and it's dependencies.
 
-   ![Installation of application and composer packages](./dkconnect-install.png)
+   ![Installation of application and composer packages](dkconnect-install.png)
 
 ## Where to Next?
 
 Congratulations on getting to this point. When you run `./dcconnect.sh` you will be shown the two URLs that you may use
 to access the application and the database (via phpMyAdmin).
 
-![Connecting to Symfony7 container](./dkconnect-img.png)
+![Connecting to Symfony7 container](dkconnect-img.png)
 
 Inside the container, you may run any `symfony console` or `php bin/console` command as you build your application. Any
 changes you make in this container are
