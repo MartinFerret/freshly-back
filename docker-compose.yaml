@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    hostname: Symfony7
+    hostname: "${DC_APP_NAME}"
     restart: unless-stopped
     container_name: "${DC_APP_NAME}" # A custom name to be used in build scripts
     depends_on:
