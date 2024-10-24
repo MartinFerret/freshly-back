@@ -8,6 +8,7 @@ tutorial [here](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-
 
 ## Features
 
+- Pre-configured Symfony 7 application
 - Easy configuration through a customizable `docker.env` file.
 - Pre-defined scripts for building and connecting to your Docker containers.
 - Seamless integration with [phpMyAdmin](https://www.phpmyadmin.net/) for database management.
