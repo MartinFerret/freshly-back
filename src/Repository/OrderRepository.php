@@ -16,28 +16,22 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-//    /**
-//     * @return Order[] Returns an array of Order objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Order
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findOrdersByStatusAndDate(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.state IN (:statuses)')
+            ->setParameter('statuses', ['paid', 'in progress'])
+            ->orderBy(
+                'CASE 
+                WHEN o.state = :paid THEN 1
+                WHEN o.state = :progress THEN 2
+                ELSE 3
+            END', 'ASC'
+            )
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setParameter('paid', 'paid')
+            ->setParameter('progress', 'in progress')
+            ->getQuery()
+            ->getResult();
+    }
 }

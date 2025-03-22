@@ -14,6 +14,6 @@ class OrderService implements OrderServiceInterface
 
     public function getAllOrders() : array
     {
-        return $this->orderRepository->findAll();
+        return $this->orderRepository->findOrdersByStatusAndDate();
     }
 }

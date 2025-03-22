@@ -50,7 +50,7 @@ class GenerateOrdersCommand extends Command
 
             $states = OrderStatus::cases();
             $randomState = $states[array_rand($states)];
-            $order->setState($randomState->name);
+            $order->setState($randomState->value);
             $products = [];
             $productCount = mt_rand(1, 5);
             for ($j = 0; $j < $productCount; $j++) {

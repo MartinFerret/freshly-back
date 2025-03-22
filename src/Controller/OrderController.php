@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class OrderController extends AbstractController
 {
-    #[Route('/api/orders', name: 'api_orders', methods: ['GET'])]
+    #[Route('/api/v1/orders', name: 'api_orders', methods: ['GET'])]
     public function getOrders(OrderService $orderService): JsonResponse
     {
         return $this->json(
