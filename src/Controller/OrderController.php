@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\Order\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -17,11 +18,34 @@ class OrderController extends AbstractController
             $orderService->getAllOrders(),
             Response::HTTP_OK,
             [],
-            ['groups' => ['order-list', 'show_technology'],
+            ['groups' => ['order-list'],
                 'circular_reference_handler' => function ($order) {
                     return $order->getId();
-                },]
+                }]
         );
+    }
 
+    #[Route('/api/v1/orders/{id}/status', name: 'update_order_status', methods: ['PUT'])]
+    public function updateOrderStatus(int $id, Request $request, OrderService $orderService): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data['state'])) {
+            return $this->json(['error' => 'State is required'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $updatedOrder = $orderService->updateOrderStatus($id, $data['state']);
+
+        return $this->json(
+            $updatedOrder,
+            Response::HTTP_OK,
+            [],
+            [
+                'groups' => ['order-list'],
+                'circular_reference_handler' => function ($order) {
+                    return $order->getId();
+                }
+            ]
+        );
     }
 }
