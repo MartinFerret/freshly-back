@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -17,22 +18,27 @@ class Product
 
     #[ORM\Column(length: 50)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $description = null;
 
     #[ORM\Column]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?float $price = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $sku = null;
 
     #[ORM\Column]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?int $quantity = null;
 
     /**

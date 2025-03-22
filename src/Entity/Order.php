@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -19,26 +20,32 @@ class Order
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 50)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $address = null;
 
     #[ORM\Column(length: 30)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $country = null;
 
     #[ORM\Column(length: 20)]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?string $state = null;
 
     /**
@@ -46,10 +53,12 @@ class Order
      */
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private Collection $product;
 
     #[ORM\Column]
     #[Groups(['order-list'])]
+    #[NotBlank]
     private ?float $totalPrice = null;
 
     public function __construct()
