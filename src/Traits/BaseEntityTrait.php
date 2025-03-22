@@ -3,18 +3,22 @@
 namespace App\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait BaseEntityTrait
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['order-list'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['order-list'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['order-list'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int

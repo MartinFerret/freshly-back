@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -17,28 +18,39 @@ class Order
     use BaseEntityTrait;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['order-list'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['order-list'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['order-list'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['order-list'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['order-list'])]
     private ?string $country = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 20)]
+    #[Groups(['order-list'])]
     private ?string $state = null;
 
     /**
      * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
+    #[Groups(['order-list'])]
     private Collection $product;
+
+    #[ORM\Column]
+    #[Groups(['order-list'])]
+    private ?float $totalPrice = null;
 
     public function __construct()
     {
@@ -137,6 +149,18 @@ class Order
     public function removeProduct(Product $product): static
     {
         $this->product->removeElement($product);
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?float
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(float $totalPrice): static
+    {
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
