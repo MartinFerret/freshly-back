@@ -1,23 +1,8 @@
-# Symfony7 Docker Template
-
-🚀 **Quickly set up your Symfony 7 application with Docker!**
-
-This starter template simplifies the process of building a Symfony application using Docker, allowing you to get up and
-running without needing to install PHP locally. Follow the step-by-step
-tutorial [here](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-with-docker-without-having-php-locally-installed-on-your-machine).
-
-## Features
-
-- Pre-configured Symfony 7 application
-- Easy configuration through a customizable `docker.env` file.
-- Pre-defined scripts for building and connecting to your Docker containers.
-- Seamless integration with [phpMyAdmin](https://www.phpmyadmin.net/) for database management.
+# Freshly
 
 ## Getting Started
 
-1. Start by creating a new repository based on the *Symfony7 Docker Template* on *[GitHub](https://github.com)*.
-
-   ![New Repository](new-repository.png)
+1. Start by creating a new repository.
 
 2. Clone the new repository on your computer and open it in your favourite editor or IDE to get started.
 3. Open the file `docker.env` and customize any of the environment variables to your needs. You may change the `DC_*`
@@ -42,18 +27,28 @@ tutorial [here](https://kumoitech.xyz/blog/how-to-start-a-symfony-7-application-
    container images and run the application.
 5. Next, run `./dkconnect.sh` to connect to the `app` service container where the *Symfony7* application is running.
 
-   ![Connecting to Symfony7 container](dkconnect-img.png)
-
 6. Run `symfony composer install` to install the application and it's dependencies.
 
-   ![Installation of application and composer packages](dkconnect-install.png)
+## Applying migrations
 
-## Where to Next?
+`php bin/console doctrine:migrations:migrate`
 
-Congratulations on getting to this point. When you run `./dcconnect.sh` you will be shown the two URLs that you may use
-to access the application and the database (via phpMyAdmin).
+## Loading fixtures
 
-![Connecting to Symfony7 container](dkconnect-img.png)
+Run `./dkconnect.sh` and then `php bin/console app:generate-order pending`.
+The command takes as argument the status of the order : "pending", "paid", "in_progress", "delivered", "cancelled".
+
+This command creates a single order with 1 to 5 products attached to it.
+
+## Routing
+
+| **Route**                          | **Méthode HTTP** | **Nom de la Route**         |
+|------------------------------------|------------------|-----------------------------|
+| `/api/v1/orders`                  | `GET`            | `api_orders`                |
+| `/api/v1/orders/{id}/status`      | `PUT`            | `update_order_status`       |
+| `/api/v1/orders/{id}`             | `DELETE`         | `delete_order`              |
+
+## General
 
 Inside the container, you may run any `symfony console` or `php bin/console` command as you build your application. Any
 changes you make in this container are

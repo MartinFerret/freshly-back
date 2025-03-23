@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/api/v1/orders')]
 class OrderController extends AbstractController
 {
-    #[Route('/api/v1/orders', name: 'api_orders', methods: ['GET'])]
+    #[Route('', name: 'api_orders', methods: ['GET'])]
     public function getOrders(OrderService $orderService): JsonResponse
     {
         return $this->json(
@@ -26,7 +27,7 @@ class OrderController extends AbstractController
         );
     }
 
-    #[Route('/api/v1/orders/{id}/status', name: 'update_order_status', methods: ['PUT'])]
+    #[Route('/{id}/status', name: 'update_order_status', methods: ['PUT'])]
     public function updateOrderStatus(int $id, Request $request, OrderService $orderService): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -50,7 +51,7 @@ class OrderController extends AbstractController
         );
     }
 
-    #[Route('/api/v1/orders/{id}', name: 'delete_order', methods: ['DELETE'])]
+    #[Route('/{id}', name: 'delete_order', methods: ['DELETE'])]
     public function deleteOrder(int $id, OrderService $orderService): Response
     {
         try {
