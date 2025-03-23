@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
 class OrderController extends AbstractController
@@ -47,5 +48,16 @@ class OrderController extends AbstractController
                 }
             ]
         );
+    }
+
+    #[Route('/api/v1/orders/{id}', name: 'delete_order', methods: ['DELETE'])]
+    public function deleteOrder(int $id, OrderService $orderService): Response
+    {
+        try {
+            $orderService->deleteOrderById($id);
+            return new Response(null, Response::HTTP_NO_CONTENT);
+        } catch (NotFoundHttpException $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_NOT_FOUND);
+        }
     }
 }

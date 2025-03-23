@@ -53,4 +53,16 @@ class OrderService implements OrderServiceInterface
             throw new \InvalidArgumentException('Invalid state transition');
         }
     }
+
+    public function deleteOrderById(int $orderId): void
+    {
+        $order = $this->entityManager->getRepository(Order::class)->find($orderId);
+
+        if (!$order) {
+            throw new NotFoundHttpException('Order not found');
+        }
+
+        $this->entityManager->remove($order);
+        $this->entityManager->flush();
+    }
 }

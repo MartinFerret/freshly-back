@@ -8,5 +8,6 @@ interface OrderServiceInterface
 {
     public function getAllOrders();
     public function updateOrderStatus(int $orderId, string $newStatus): Order;
+    public function  deleteOrderById(int $orderId);
 
 }
