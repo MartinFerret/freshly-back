@@ -1,6 +1,5 @@
 <?php
 
-// src/Command/GenerateOrderCommand.php
 
 namespace App\Command;
 
