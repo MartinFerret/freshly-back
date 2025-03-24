@@ -35,7 +35,11 @@
 
 ## Loading fixtures
 
-Run `./dkconnect.sh` and then `php bin/console app:generate-order pending`.
+Run `./dkconnect.sh` and then `php bin/console doctrine:fixtures:load` 
+
+## Create a single order
+
+Run `./dkconnect.sh` and then `php bin/console app:generate-order <status>`.
 The command takes as argument the status of the order : "pending", "paid", "in_progress", "delivered", "cancelled".
 
 This command creates a single order with 1 to 5 products attached to it.

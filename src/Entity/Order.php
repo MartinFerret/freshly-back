@@ -38,7 +38,7 @@ class Order
     #[NotBlank]
     private ?string $address = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 60)]
     #[Groups(['order-list'])]
     #[NotBlank]
     private ?string $country = null;
