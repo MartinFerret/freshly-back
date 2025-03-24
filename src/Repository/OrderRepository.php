@@ -19,18 +19,7 @@ class OrderRepository extends ServiceEntityRepository
     public function findOrdersByStatusAndDate(): array
     {
         return $this->createQueryBuilder('o')
-            ->where('o.state IN (:statuses)')
-            ->setParameter('statuses', ['paid', 'in progress'])
-            ->orderBy(
-                'CASE 
-                WHEN o.state = :paid THEN 1
-                WHEN o.state = :progress THEN 2
-                ELSE 3
-            END', 'ASC'
-            )
-            ->addOrderBy('o.createdAt', 'DESC')
-            ->setParameter('paid', 'paid')
-            ->setParameter('progress', 'in progress')
+            ->orderBy('o.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
