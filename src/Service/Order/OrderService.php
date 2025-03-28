@@ -6,16 +6,14 @@ use App\Enum\OrderStatus;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Order;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderService implements OrderServiceInterface
 {
-    private OrderRepository $orderRepository;
-    private EntityManagerInterface $entityManager;
-    public function __construct(OrderRepository $orderRepository, EntityManagerInterface $entityManager)
-    {
-        $this->orderRepository = $orderRepository;
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        private OrderRepository $orderRepository,
+        private EntityManagerInterface $entityManager
+    ) {}
 
     public function getAllOrders() : array
     {
